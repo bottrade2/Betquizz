@@ -99,7 +99,7 @@ router.post('/webhook', async (req, res) => {
 // ── GET /payment/deposit-address ────────────────────────────────────────────
 router.get('/deposit-address', auth, async (req, res) => {
   try {
-    const address  = getOperatorAddress();
+    const address = process.env.SOLANA_DEPOSIT_ADDRESS || getOperatorAddress();
     const solPrice = await getSolEurPrice();
     res.json({ address, solPrice });
   } catch (err) {
