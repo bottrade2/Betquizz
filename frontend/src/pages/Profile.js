@@ -361,10 +361,6 @@ export default function Profile({ user, onBalanceUpdate, onAvatarUpdate }) {
                       </button>
                     </div>
 
-                    <div style={{ color: 'var(--text-3)', fontSize: 13, textAlign: 'center', marginTop: 16, lineHeight: 1.5 }}>
-                      Após enviar SOL para este endereço, contacta o admin para creditar o teu saldo.
-                    </div>
-
                     <div className="modal-actions" style={{ marginTop: 16 }}>
                       <button className="btn btn-ghost btn-sm" onClick={closeWallet}>
                         {t('wallet_cancel')}
