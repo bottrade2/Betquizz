@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const auth    = require('../middleware/auth');
 const { pool } = require('../database');
-const { getOrCreateDepositAddress, checkUserDeposits, getSolEurPrice, sendWithdrawal } = require('../utils/solana');
+const { getOperatorAddress, checkUserDeposits, getSolEurPrice, sendWithdrawal } = require('../utils/solana');
 
 // Stripe é opcional — só inicializa se a chave existir
 let stripe = null;
@@ -99,12 +99,12 @@ router.post('/webhook', async (req, res) => {
 // ── GET /payment/deposit-address ────────────────────────────────────────────
 router.get('/deposit-address', auth, async (req, res) => {
   try {
-    const address  = await getOrCreateDepositAddress(req.user.id);
+    const address  = getOperatorAddress();
     const solPrice = await getSolEurPrice();
     res.json({ address, solPrice });
   } catch (err) {
     console.error('deposit-address error:', err);
-    res.status(500).json({ message: 'Error generating deposit address.' });
+    res.status(500).json({ message: 'Error getting deposit address.' });
   }
 });
 

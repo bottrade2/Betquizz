@@ -266,4 +266,9 @@ function startSweeper(intervalMs = 10 * 60 * 1000) {
   console.log(`[Solana] Sweep watcher started (every ${intervalMs / 60000} min)`);
 }
 
-module.exports = { getOrCreateDepositAddress, checkUserDeposits, getSolEurPrice, startDepositWatcher, setIo, sendWithdrawal, startSweeper };
+function getOperatorAddress() {
+  if (!process.env.SOLANA_WITHDRAWAL_KEYPAIR) throw new Error('SOLANA_WITHDRAWAL_KEYPAIR not set');
+  return getWithdrawalKeypair().publicKey.toBase58();
+}
+
+module.exports = { getOrCreateDepositAddress, getOperatorAddress, checkUserDeposits, getSolEurPrice, startDepositWatcher, setIo, sendWithdrawal, startSweeper };

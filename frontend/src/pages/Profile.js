@@ -54,9 +54,6 @@ export default function Profile({ user, onBalanceUpdate, onAvatarUpdate }) {
       .then(({ data }) => { setSolAddress(data.address); setSolPrice(data.solPrice); })
       .catch(() => {});
 
-    // Auto-poll every 15s while modal is open
-    solPollRef.current = setInterval(() => checkSolDeposit(false), 15000);
-    return () => clearInterval(solPollRef.current);
   }, [walletModal]);
 
   const checkSolDeposit = useCallback(async (manual = true) => {
@@ -364,19 +361,11 @@ export default function Profile({ user, onBalanceUpdate, onAvatarUpdate }) {
                       </button>
                     </div>
 
-                    <div className="sol-waiting">
-                      <div className="sol-pulse" />
-                      <span>{t('wallet_sol_waiting')}</span>
+                    <div style={{ color: 'var(--text-3)', fontSize: 13, textAlign: 'center', marginTop: 16, lineHeight: 1.5 }}>
+                      Após enviar SOL para este endereço, contacta o admin para creditar o teu saldo.
                     </div>
 
                     <div className="modal-actions" style={{ marginTop: 16 }}>
-                      <button
-                        className="btn btn-primary"
-                        onClick={() => checkSolDeposit(true)}
-                        disabled={solChecking || !solAddress}
-                      >
-                        {solChecking ? t('wallet_checking') : t('wallet_sol_check')}
-                      </button>
                       <button className="btn btn-ghost btn-sm" onClick={closeWallet}>
                         {t('wallet_cancel')}
                       </button>
