@@ -1,0 +1,16 @@
+{
+  "name": "betquizz",
+  "version": "1.0.0",
+  "description": "BetQuizz — Quiz competitivo com apostas",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm install && CI=false npm run build && cd ../backend && npm install",
+    "dev": "npm run dev:backend & npm run start:frontend",
+    "dev:backend": "cd backend && npm run dev",
+    "start:frontend": "cd frontend && npm start",
+    "start": "cd backend && npm start"
+  }
+}
